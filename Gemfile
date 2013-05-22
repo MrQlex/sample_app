@@ -12,14 +12,14 @@ end
 group :development do
 	gem 'sqlite3'
 	gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
-	gem 'rspec-rails', '2.5.0'
+	gem 'rspec-rails'
 end
 
 group :test do
 	gem 'sqlite3'
 	gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
-	gem 'rspec', '2.5.0'
-	gem 'webrat', '0.7.1'
+	gem 'rspec'
+	gem 'webrat'
 end
 
 # Gems used only for assets and not required
