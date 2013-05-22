@@ -1,3 +1,7 @@
+sample_app
+==========
+This is the sample app from the tutorial [http://french.railstutorial.org/](http://french.railstutorial.org/)
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
