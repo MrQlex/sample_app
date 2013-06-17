@@ -23,6 +23,8 @@ describe "LayoutLinks" do
 	
 	it "devrait avoir le non lien sur le layout" do
 		visit root_path
+		click_link "S'inscrire"
+		response.should have_selector('title', :content => "Inscription")
 		click_link "A Propos"
 		response.should have_selector('title', :content => "A Propos")
 		click_link "Contact"
@@ -31,7 +33,5 @@ describe "LayoutLinks" do
 		response.should have_selector('title', :content => "Accueil")
 		click_link "Aide"
 		response.should have_selector('title', :content => "Aide")
-		click_link "S'inscrire"
-		response.should have_selector('title', :content => "Inscription")
 	end
 end

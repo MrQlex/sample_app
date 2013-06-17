@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
+gem 'gravatar_image_tag', '1.0.0.pre2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -20,6 +21,7 @@ group :test do
 	gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 	gem 'rspec'
 	gem 'webrat'
+	gem 'factory_girl_rails', '1.0'
 end
 
 # Gems used only for assets and not required
