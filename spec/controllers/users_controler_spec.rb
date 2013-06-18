@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'spec_helper'
 
 describe UsersController do
@@ -9,7 +10,7 @@ describe UsersController do
 			@user = Factory(:user)
 		end
 		
-		it "devrait reussir" do
+		it "devrait réussir" do
 			get :show, :id => @user
 			response.should be_success
 		end
@@ -31,13 +32,13 @@ describe UsersController do
 		
 		it "devrait avoir une image de profil" do
 			get :show, :id => @user
-			response.should have_selector("img", :class => "gravatar")
+			response.should have_selector("h1>img", :alt=> @user.nom, :class => "gravatar")
 		end
 	end
 	
 	describe "GET 'new'" do
 
-		it "devrait reussir" do
+		it "devrait réussir" do
 			get 'new'
 			response.should be_success
 		end
@@ -45,6 +46,55 @@ describe UsersController do
 		it "devrait avoir le bon titre" do
 			get 'new'
 			response.should have_selector("title", :content => "Inscription")
+		end
+	end
+	
+	describe "POST 'create'" do
+		
+		describe "échec" do
+			
+			before(:each) do
+				@attr = {:nom=>"", :email=>"", :password=>"", :password_confirmation=>""}
+			end
+			
+			it "ne devrait pas créer d'utilisateur" do
+				lambda do
+					post :create, :user => @attr
+				end.should_not change(User, :count)
+			end
+			
+			it "devrait avoir le bon titre" do
+				post :create, :user => @attr
+				response.should have_selector("title", :content => "Inscription")
+			end
+			
+			it "devrait rendre la page 'new'" do
+				post :create, :user => @attr
+				response.should render_template('new')
+			end
+		end
+		
+		describe "succès" do
+		
+			before(:each) do
+				@attr={ :nom=>"New User", :email=>"user@example.com", :password=>"foobar", :password_confirmation=>"foobar"}
+			end
+			
+			it "devrait créer un utilisateur" do
+				lambda do
+					post :create, :user => @attr
+				end.should change(User, :count).by(1)
+			end
+			
+			it "devrait rediriger ver la page e l'utilisateur" do
+				post :create, :user => @attr
+				response.should redirect_to(user_path(assigns(:user)))
+			end
+			
+			it "devrait avoir un message de bien venue" do
+				post :create, :user => @attr
+				flash[:success].should =~ /Bienvenue dans l'Application Exemple/i
+			end
 		end
 	end
 end
